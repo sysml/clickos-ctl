@@ -110,18 +110,24 @@ bool conf::parse(int argc, char** argv)
     if (optind < argc) {
         std::string cmd(argv[optind]);
 
+        argc -= optind;
+        argv += optind;
+
+        optind = 0;
+        optopt = 0;
+
         if (cmd == "install") {
             op = operation::install;
-            error = parse_install(argc - optind, argv + optind);
+            error = parse_install(argc, argv);
         } else if (cmd == "remove") {
             op = operation::remove;
-            error = parse_remove(argc - optind, argv + optind);
+            error = parse_remove(argc, argv);
         } else if (cmd == "start") {
             op = operation::start;
-            error = parse_start(argc - optind, argv + optind);
+            error = parse_start(argc, argv);
         } else if (cmd == "stop") {
             op = operation::stop;
-            error = parse_stop(argc - optind, argv + optind);
+            error = parse_stop(argc, argv);
         } else {
             printf("Invalid command (%s)\n", cmd.c_str());
             error = true;
