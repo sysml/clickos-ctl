@@ -124,12 +124,12 @@ int xsctl::router_install(const std::string& domain, const std::string& config, 
         for (unsigned int i = 0 ; ; i++) {
             path = router_path + "/config/" + std::to_string(i);
 
-            unsigned int pos = i * XENSTORE_PAYLOAD_MAX;
+            unsigned int pos = i * chunk_max_len;
             if (pos >= config.length()) {
                 break;
             }
 
-            std::string chunk = config.substr(i * XENSTORE_PAYLOAD_MAX, XENSTORE_PAYLOAD_MAX);
+            std::string chunk = config.substr(i * chunk_max_len, chunk_max_len);
 
             if (!xs_write(xsh, xst, path.c_str(), chunk.c_str(), chunk.length())) {
                 ret = errno;
