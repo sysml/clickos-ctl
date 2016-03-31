@@ -45,7 +45,7 @@
 
 namespace clickos {
 
-int read_click_config(const std::string path, std::string& config)
+int read_click_config(const std::string& path, std::string& config)
 {
     std::ostringstream buff;
 

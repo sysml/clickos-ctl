@@ -69,7 +69,7 @@ int get_int(const std::string arg, int_t& number)
     return 0;
 }
 
-int read_click_config(const std::string path, std::string& config);
+int read_click_config(const std::string& path, std::string& config);
 
 void basename(const std::string& path, std::string& name);
 
