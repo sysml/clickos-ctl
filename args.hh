@@ -75,6 +75,7 @@ public:
 
     std::string domain;
     clickos::router::id_t router_id;
+
     std::string click_config_path;
 
     bool install_start;

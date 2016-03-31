@@ -52,6 +52,7 @@ conf::conf(void)
 
     domain(""),
     router_id(0),
+
     click_config_path(""),
 
     install_start(false),
