@@ -192,7 +192,8 @@ int xsctl::router_remove(const std::string& domain, router::id_t rid, bool force
         }
 
         /* Determine router status */
-        std::string status_path = click_path + "/" + std::to_string(rid) + "/status";
+        std::string router_path = click_path + "/" + std::to_string(rid);
+        std::string status_path = router_path + "/status";
 
         char* result;
         unsigned int length;
@@ -227,7 +228,7 @@ int xsctl::router_remove(const std::string& domain, router::id_t rid, bool force
             }
         }
 
-        if (!xs_rm(xsh, xst, click_path.c_str())) {
+        if (!xs_rm(xsh, xst, router_path.c_str())) {
             ret = errno;
             printf("Failed to write to xenstore.\n");
             break;
