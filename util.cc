@@ -47,10 +47,19 @@ namespace clickos {
 
 int read_click_config(const std::string path, std::string& config)
 {
-    std::ifstream stream(path);
     std::ostringstream buff;
 
+    std::ifstream stream(path);
+    if (!stream.is_open()) {
+        printf("Failed to open configuration file '%s'\n", path.c_str());
+        return ENOENT;
+    }
+
     buff << stream.rdbuf();
+    if (stream.bad()) {
+        printf("Failed to read configuration file '%s'\n", path.c_str());
+        return EINVAL;
+    }
 
     config = buff.str();
 
