@@ -221,13 +221,14 @@ int xsctl::router_remove(const std::string& domain, router::id_t rid, bool force
             if (force) {
                 printf("Router running but force enable, continuing.\n");
             } else {
+                ret = EINVAL;
                 printf("Cannot remove running router.\n");
                 break;
             }
         }
 
-        ret = xs_rm(xsh, xst, click_path.c_str());
-        if (ret) {
+        if (!xs_rm(xsh, xst, click_path.c_str())) {
+            ret = errno;
             printf("Failed to write to xenstore.\n");
             break;
         }
