@@ -71,6 +71,8 @@ int get_int(const std::string arg, int_t& number)
 
 int read_click_config(const std::string path, std::string& config);
 
+void basename(const std::string& path, std::string& name);
+
 } /* namespace clickos */
 
 #endif /*  __UTIL__HH__ */

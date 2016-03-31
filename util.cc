@@ -66,4 +66,16 @@ int read_click_config(const std::string path, std::string& config)
     return 0;
 }
 
+void basename(const std::string& path, std::string& name)
+{
+    std::string::size_type pos;
+
+    pos = path.rfind("/");
+    if (pos == std::string::npos) {
+        name = path;
+    } else {
+        name = path.substr(pos + 1);
+    }
+}
+
 } /* namespace clickos */
