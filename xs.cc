@@ -524,7 +524,7 @@ int xsctl::str2status(const std::string& str, router::status_t& status)
         status = router::status_t::unknown;
     } else if (str == "Running") {
         status = router::status_t::running;
-    } else if (str == "Stopped") {
+    } else if (str == "Halted") {
         status = router::status_t::stopped;
     } else if (str == "Error") {
         status = router::status_t::error;
@@ -547,7 +547,7 @@ void xsctl::status2str(router::status_t status, std::string& str)
             break;
 
         case router::status_t::stopped:
-            str = "Stopped";
+            str = "Halted";
             break;
 
         case router::status_t::error:
