@@ -69,7 +69,8 @@ public:
     ~xsctl();
 
 public:
-    int router_install(const std::string& domain, const std::string& config, router::id_t& rid);
+    int router_install(const std::string& domain,
+            const std::string& name, const std::string& config, router::id_t& rid);
     int router_remove(const std::string& domain, router::id_t rid, bool force);
 
     int router_set_status(const std::string& domain, router::id_t rid, router::status_t nstatus);

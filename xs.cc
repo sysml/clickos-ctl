@@ -61,7 +61,8 @@ xsctl::~xsctl()
 }
 
 
-int xsctl::router_install(const std::string& domain, const std::string& config, router::id_t& rid)
+int xsctl::router_install(const std::string& domain,
+        const std::string& name, const std::string& config, router::id_t& rid)
 {
     int ret;
     xs_transaction_t xst;
@@ -98,7 +99,7 @@ int xsctl::router_install(const std::string& domain, const std::string& config, 
         /* Install configuration on xenstore */
         std::string path;
         std::string router_path = click_path + "/" + std::to_string(nrid);
-        std::string entries[] = {"/config_name", "/control", "/elements"};
+        std::string entries[] = {"/control", "/elements"};
 
         for (std::string e : entries) {
             path = router_path + e;
@@ -109,6 +110,13 @@ int xsctl::router_install(const std::string& domain, const std::string& config, 
             }
         }
         if (ret) {
+            break;
+        }
+
+        path = router_path + "/config_name";
+        if (!xs_write(xsh, xst, path.c_str(), name.c_str(), name.length())) {
+            ret = errno;
+            printf("Failed to write to xenstore.\n");
             break;
         }
 

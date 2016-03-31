@@ -65,13 +65,16 @@ static int op_install(clickos::conf& c)
         return ret;
     }
 
+    std::string name;
+    clickos::basename(c.click_config_path, name);
+
     ret = 0;
     switch (c.mech) {
         case clickos::mechanism::xenstore: {
             clickos::router::id_t rid;
             clickos::xenstore::xsctl xsc;
 
-            ret = xsc.router_install(c.domain, router_config, rid);
+            ret = xsc.router_install(c.domain, name, router_config, rid);
             if (ret) {
                 printf("[ %s ] failed to install router.\n", c.domain.c_str());
                 break;
