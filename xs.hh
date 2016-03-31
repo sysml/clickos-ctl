@@ -54,6 +54,13 @@ extern "C" {
 namespace clickos {
 namespace xenstore {
 
+/* Define the maximum length of each configuration chunk written to the
+ * xenstore. Theoretically this value depends only on the xenstore, but ClickOS
+ * is not accepting big chunk sizes, so for now set a value that works.
+ *
+ * TODO: Check whether chunk_max_len can be increased.
+ */
+const unsigned int chunk_max_len = 512;
 const std::string click_base_path = "/data/clickos";
 
 class xsctl {
